@@ -1,0 +1,37 @@
+{% extends 'shop/basic.html' %}
+
+{% block css %}
+.move{
+position: relative;
+left:-30px;
+}
+{% endblock %}
+
+
+{% block title %}
+{{product.product_name}}-My Home Shop
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col md-4">
+            <img src="/media/{{product.image}}" max-width="200px" height="400px">
+            <br>
+            <button class="btn btn-primary mx-3 move">Add to Cart</button>
+            <button class="btn btn-success move">Buy Now</button>
+        </div>
+        <div class="col md-8">
+            <h1>{{product.product_name}}</h1>
+            <p><b>Price: Rs{{product.price}} </b></p>
+            <p> {{product.description}}</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
