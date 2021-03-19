@@ -1,7 +1,10 @@
 {% extends 'shop/basic.html' %}
 {% block title%} Checkout - My Awesome Cart{% endblock %}
 {% block body %}
-<div class="container">
+<div class="container main-body">
+    <div class="message">
+
+    </div>
     <div class="col my-4">
         <h2>Step 1 - My Home Shop Checkout - Review Your Cart Items</h2>
         <div>
@@ -58,6 +61,8 @@
 
 {% block js %}
 <script>
+document.querySelector(".searchProduct").innerHTML = ""
+document.querySelector(".cart-button").innerHTML = ""
 if(localStorage.getItem('cart') == null){
 var cart = new Object();
 }
@@ -85,8 +90,18 @@ else {
 document.getElementById('cart').innerHTML = sum
 $('#items').val(JSON.stringify(cart))
 {% if check %}
-alert('Thanks for ordering with us. Your order is is {{order_id}}. Use it to track your order using our order tracker');
-localStorage.clear();
+document.querySelector(".message").innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Order Placed Successfully!</strong> Your order id is {{order_id}}.Please use it to track your order.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true" onClick="sendToHome()">&times;</span>
+  </button>
+</div>`
 {% endif %}
+
+function sendToHome() {
+    localStorage.clear()
+    document.location.href = '/shop/'
+}
+
 </script>
 {% endblock %}

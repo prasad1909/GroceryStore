@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Product, Contact, Order, UpdateOrder
 import json
+from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
+@login_required(login_url='/login')
 def index(request):
     all_products = Product.objects.all()
     categories = {prod.category for prod in all_products}
@@ -23,10 +24,12 @@ def index(request):
     return render(request, "shop/index.html", params)
 
 
+@login_required(login_url='/login')
 def about(request):
     return render(request, "shop/about.html")
 
 
+@login_required(login_url='/login')
 def contact(request):
     name = request.POST.get('name', '')
     email = request.POST.get('email', '')
@@ -37,6 +40,7 @@ def contact(request):
     return render(request, "shop/contact.html")
 
 
+@login_required(login_url='/login')
 def tracker(request):
     if request.method == "POST":
         order_id = request.POST.get('orderId', '')
@@ -45,10 +49,11 @@ def tracker(request):
             order = Order.objects.filter(order_id=order_id, email=email)
             if len(order) > 0:
                 update = UpdateOrder.objects.filter(order_id=order_id)
+                itemList = order[0].items
                 updates = []
                 for item in update:
                     updates.append({'text': item.update_desc, 'time': item.time})
-                    response = json.dumps(updates, default=str)
+                    response = json.dumps([updates, itemList], default=str)
                 return HttpResponse(response)
             else:
                 return HttpResponse('{}')
@@ -58,11 +63,13 @@ def tracker(request):
     return render(request, "shop/tracker.html")
 
 
+@login_required(login_url='/login')
 def productView(request, myid):
     product = Product.objects.filter(id=myid)
     return render(request, "shop/productView.html", {'product': product[0]})
 
 
+@login_required(login_url='/login')
 def checkOut(request):
     if request.method == "POST":
         items = request.POST.get('items', '')
@@ -75,7 +82,7 @@ def checkOut(request):
         phone = request.POST.get('phone', '')
         order = Order(items=items, name=name, email=email, address=address, city=city, state=state, zip_code=zip_code, phone=phone)
         order.save()
-        update = UpdateOrder(order_id=order.order_id, update_desc="update placed")
+        update = UpdateOrder(order_id=order.order_id, update_desc="Order Placed Successfully")
         update.save()
         check = True
         order_id = order.order_id
@@ -83,5 +90,6 @@ def checkOut(request):
     return render(request, "shop/checkout.html")
 
 
+@login_required(login_url='/login')
 def search(request):
     return render(request, "shop/search.html")
