@@ -148,6 +148,7 @@ $('.divpr').on('click', 'button.minus', function(){
     let pr_id = this.id.slice(5,)
     console.log(pr_id)
     cart[pr_id][0] -= 1
+    cart[pr_id][0] = Math.max(cart[pr_id][0], 0)
     if(cart[pr_id][0] == 0){
         document.getElementById(`div${pr_id}`).innerHTML = `<button id="${pr_id}" class="btn btn-primary cart">Add to Cart</button>`
     }
