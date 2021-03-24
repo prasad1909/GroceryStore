@@ -93,3 +93,8 @@ def checkOut(request):
 @login_required(login_url='/login')
 def search(request):
     return render(request, "shop/search.html")
+
+
+@login_required(login_url='/login')
+def smartphone(request):
+    return render(request, "shop/smartphone.html")
