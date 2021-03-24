@@ -1,0 +1,50 @@
+{% extends 'shop/basic.html' %}
+
+{% block css %}
+body{
+overflow-x: hidden;
+}
+{% endblock %}
+
+{% block body %}
+{% load static %}
+<div class="row my-5 d-flex justify-content-center align-items-center">
+  <div class="col-sm-6">
+<div class="card" style="width: 25rem; margin-left: 250px">
+  <img src="{%static 'shop/smartphones1.jpg'%}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h1 class="card-title" style="text-align: center;">Smartphones</h1>
+  </div>
+</div>
+    </div>
+   <div class="col-sm-6">
+<div class="card" style="width: 25rem;">
+  <img src="{%static 'shop/laptop.jpg'%}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h1 class="card-title" style="text-align: center;">Laptops</h1>
+  </div>
+</div>
+    </div>
+
+</div>
+
+<div class="row my-5 d-flex justify-content-center align-items-center">
+  <div class="col-sm-6">
+<div class="card" style="width: 25rem; margin-left: 250px">
+  <img src="{%static 'shop/tv.jpg'%}" class="card-img-top" alt="..." height="236px">
+  <div class="card-body">
+    <h1 class="card-title" style="text-align: center;">Televisions</h1>
+  </div>
+</div>
+    </div>
+   <div class="col-sm-6">
+<div class="card" style="width: 25rem;">
+  <img src="{%static 'shop/access.jpg'%}" class="card-img-top" alt="..." height="236px">
+  <div class="card-body">
+    <h1 class="card-title" style="text-align: center;">Accessories</h1>
+  </div>
+</div>
+    </div>
+
+</div>
+{% endblock %}

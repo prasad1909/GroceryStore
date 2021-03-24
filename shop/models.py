@@ -49,4 +49,4 @@ class UpdateOrder(models.Model):
     time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.update_desc[0:10] + "..."
+        return str(self.update_id) + " " + self.update_desc[0:10]

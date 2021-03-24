@@ -21,7 +21,7 @@ def index(request):
 
     params = {'allProducts': products}
 
-    return render(request, "shop/index.html", params)
+    return render(request, "shop/home.html", params)
 
 
 @login_required(login_url='/login')

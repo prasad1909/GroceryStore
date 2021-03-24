@@ -1,5 +1,11 @@
 {% extends 'shop/basic.html' %}
 {% block title%} Checkout - My Awesome Cart{% endblock %}
+
+{% block css %}
+.move-left{
+    margin-right: 32px;
+}
+{% endblock %}
 {% block body %}
 <div class="container">
     <div class="col my-4">
@@ -75,13 +81,19 @@ $('#tracker').submit(function(event) {
                 }
                 cart = JSON.parse(data[1])
                 document.querySelector(".OrderDetailsHeading").innerHTML = "Order Details"
+                totalprice = 0
                 for(let item in cart){
                     qty = cart[item][0]
                     name = cart[item][1]
-                    listr = ` <li class="list-group-item d-flex justify-content-between align-items-center">
-                                ${name}
-                                <span class="badge badge-primary badge-pill">${qty}</span>
-                            </li>`
+                    itemprice = cart[item][2]
+        totalprice += itemprice*qty
+        listr = ` <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name}
+                    <div class="justify-content-center">
+                    <span class="badge badge-primary badge-pill move-left">₹${itemprice}</span>
+                    <span class="badge badge-primary badge-pill">${qty}</span>
+                    </div>
+                </li>`
                     $('.orderDetails').append(listr)
                 }
             }
