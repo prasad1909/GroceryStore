@@ -98,3 +98,15 @@ def search(request):
 @login_required(login_url='/login')
 def smartphone(request):
     return render(request, "shop/smartphone.html")
+
+@login_required(login_url='/login')
+def accessories(request):
+    return render(request, "shop/accessories.html")
+
+@login_required(login_url='/login')
+def television(request):
+    return render(request, "shop/television.html")
+
+@login_required(login_url='/login')
+def laptops(request):
+    return render(request, "shop/laptops.html")

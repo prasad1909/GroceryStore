@@ -9,6 +9,8 @@ urlpatterns = [
     path('products/<int:myid>', views.productView, name="productView"),
     path('checkOut/', views.checkOut, name="checkout"),
     path('search/',views.search, name="search"),
-    path('smartphone/', views.smartphone, name="smartphone")
-
+    path('smartphone/', views.smartphone, name="smartphone"),
+    path('accessories/', views.smartphone, name="accessories"),
+    path('television/', views.smartphone, name="television"),
+    path('laptops/', views.smartphone, name="laptops")
 ]
