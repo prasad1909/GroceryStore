@@ -105,21 +105,21 @@
 
 {% block js %}
 <script>
-if((localStorage.getItem('cart') == null || localStorage.getItem('cart') == {}) && localStorage.getItem('smartphoneCart') == null){
+if(localStorage.getItem('cart') == null && localStorage.getItem('accessoryCart') == null){
 var cart = new Object();
-smartphoneCart = new Object();
+accessoryCart = new Object();
 }
-if(localStorage.getItem('smartphoneCart') == null){
-smartphoneCart = new Object();
-localStorage.setItem('smartphoneCart', JSON.stringify(smartphoneCart));
+if(localStorage.getItem('accessoryCart') == null){
+accessoryCart = new Object();
+localStorage.setItem('accessoryCart', JSON.stringify(accessoryCart));
 }
 if(localStorage.getItem('cart') != null)
 {
 updatePopOver()
 cart = JSON.parse(localStorage.getItem('cart'));
 document.getElementById('cart').innerHTML = Object.keys(cart).length;
-smartphoneCart = JSON.parse(localStorage.getItem('smartphoneCart'));
-for(item in smartphoneCart)
+accessoryCart = JSON.parse(localStorage.getItem('accessoryCart'));
+for(item in accessoryCart)
 {
         console.log("from cart", item)
         document.getElementById(`div${item}`).innerHTML =
@@ -139,12 +139,12 @@ else {
     name = document.getElementById(`name${idstr}`).innerHTML
     price = document.getElementById(`price${idstr}`).innerHTML
     cart[idstr] = [qty, name, price]
-    smartphoneCart[idstr] = [qty, name, price]
-    console.log(smartphoneCart)
+    accessoryCart[idstr] = [qty, name, price]
+    console.log(accessoryCart)
     console.log(cart)
 }
 localStorage.setItem('cart', JSON.stringify(cart));
-localStorage.setItem('smartphoneCart', JSON.stringify(smartphoneCart));
+localStorage.setItem('accessoryCart', JSON.stringify(accessoryCart));
 document.getElementById('cart').innerHTML = Object.keys(cart).length;
 updateCart(cart)
 });
@@ -156,7 +156,7 @@ function updateCart(cart){
     let total = 0
     for (let item in cart){
         total += cart[item][0]
-         if(item in smartphoneCart){
+         if(item in accessoryCart){
         console.log("from cart", item)
         document.getElementById(`div${item}`).innerHTML =
         `<button class = "btn btn-primary minus" id = "minus${item}">-</button>
@@ -208,14 +208,14 @@ function updatePopOver(){
 }
 
 function clearCart(){
-    smartphoneCart = JSON.parse(localStorage.getItem('smartphoneCart'))
-    for (let item in smartphoneCart){
+    accessoryCart = JSON.parse(localStorage.getItem('accessoryCart'))
+    for (let item in accessoryCart){
         document.getElementById(`div${item}`).innerHTML = `<button id="${item}" class="btn btn-primary cart">Add to Cart</button>`
 }
     localStorage.clear()
     cart = {}
-    smartphoneCart = {}
-    updateCart(smartphoneCart)
+    accessoryCart = {}
+    updateCart(accessoryCart)
 }
 </script>
 {% endblock %}

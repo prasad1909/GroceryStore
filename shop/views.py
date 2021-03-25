@@ -6,22 +6,8 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/login')
-def index(request):
-    all_products = Product.objects.all()
-    categories = {prod.category for prod in all_products}
-    products = []
-    for category in categories:
-        product = Product.objects.filter(category=category)
-        n = len(product)
-        if n % 4 == 0:
-            number_of_slides = n//4
-        else:
-            number_of_slides = n//4 + 1
-        products.append([product, range(1, number_of_slides), number_of_slides])
-
-    params = {'allProducts': products}
-
-    return render(request, "shop/home.html", params)
+def home(request):
+    return render(request, "shop/home.html")
 
 
 @login_required(login_url='/login')
@@ -65,7 +51,7 @@ def tracker(request):
 
 @login_required(login_url='/login')
 def productView(request, myid):
-    product = Product.objects.filter(id=myid)
+    product = Product.objects.filter(product_id=myid)
     return render(request, "shop/productView.html", {'product': product[0]})
 
 
@@ -97,16 +83,61 @@ def search(request):
 
 @login_required(login_url='/login')
 def smartphone(request):
-    return render(request, "shop/smartphone.html")
+    products = []
+    product = Product.objects.filter(category='Smartphone')
+    n = len(product)
+    if n % 4 == 0:
+        number_of_slides = n // 4
+    else:
+        number_of_slides = n // 4 + 1
+    products.append([product, range(1, number_of_slides), number_of_slides])
+
+    params = {'allProducts': products}
+
+    return render(request, "shop/smartphone.html", params)
+
 
 @login_required(login_url='/login')
 def accessories(request):
-    return render(request, "shop/accessories.html")
+    products = []
+    product = Product.objects.filter(category='Accessories')
+    n = len(product)
+    if n % 4 == 0:
+        number_of_slides = n // 4
+    else:
+        number_of_slides = n // 4 + 1
+    products.append([product, range(1, number_of_slides), number_of_slides])
+
+    params = {'allProducts': products}
+
+    return render(request, "shop/accessories.html", params)
+
 
 @login_required(login_url='/login')
 def television(request):
-    return render(request, "shop/television.html")
+    products = []
+    product = Product.objects.filter(category='Television')
+    n = len(product)
+    if n % 4 == 0:
+        number_of_slides = n // 4
+    else:
+        number_of_slides = n // 4 + 1
+    products.append([product, range(1, number_of_slides), number_of_slides])
+
+    params = {'allProducts': products}
+    return render(request, "shop/television.html", params)
+
 
 @login_required(login_url='/login')
 def laptops(request):
-    return render(request, "shop/laptops.html")
+    products = []
+    product = Product.objects.filter(category='Laptop')
+    n = len(product)
+    if n % 4 == 0:
+        number_of_slides = n // 4
+    else:
+        number_of_slides = n // 4 + 1
+    products.append([product, range(1, number_of_slides), number_of_slides])
+
+    params = {'allProducts': products}
+    return render(request, "shop/laptops.html", params)
