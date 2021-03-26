@@ -71,7 +71,33 @@ height: 250px;
 
 {% block js %}
 <script>
-  document.querySelector(".searchProduct").innerHTML = ""
-  document.querySelector(".cart-button").innerHTML = ""
+if(localStorage.getItem('cart') != undefined){
+    updatePopOver()
+   }
+  function updatePopOver(){
+    var popStr = "";
+    popStr = popStr + "<h5> Items in your shopping cart </h5><div class='mx-2 my-2'>";
+    var i = 1
+    popCart = JSON.parse(localStorage.getItem('cart'))
+    total = 0
+    for (var item in popCart){
+        popStr = popStr + "<b>" + i + "</b>. ";
+        popStr = popStr + popCart[item][1] + "... Qty: " + popCart[item][0] + '<br>';
+        total += popCart[item][0]
+        i = i+1;
+    }
+    popStr = popStr + `</div> <a href='/shop/checkOut'><button class='btn btn-danger' id='checkout'>Check Out</button></a>
+                                                   <button class='btn btn-primary' onclick="clearCart()" id='clearCart'>Clear Cart</button>`
+    document.getElementById('popcart').setAttribute('data-content', popStr);
+    document.getElementById('cart').innerHTML = total;
+    $('#popcart').popover('show');
+    }
+
+    function clearCart() {
+    localStorage.clear();
+    cart = {};
+    updatePopOver()
+}
+
 </script>
 {% endblock %}

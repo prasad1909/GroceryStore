@@ -157,7 +157,6 @@ function updateCart(cart){
     for (let item in cart){
         total += cart[item][0]
          if(item in smartphoneCart){
-        console.log("from cart", item)
         document.getElementById(`div${item}`).innerHTML =
         `<button class = "btn btn-primary minus" id = "minus${item}">-</button>
          <span id="value${item}">${cart[item][0]}</span> <button class = "btn btn-primary plus" id = "plus${item}">+</button>`

@@ -12,5 +12,6 @@ urlpatterns = [
     path('smartphone/', views.smartphone, name="smartphone"),
     path('accessories/', views.accessories, name="accessories"),
     path('television/', views.television, name="television"),
-    path('laptops/', views.laptops, name="laptops")
+    path('laptops/', views.laptops, name="laptops"),
+    path('search/', views.search, name="search")
 ]

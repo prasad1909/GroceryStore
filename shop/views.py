@@ -141,3 +141,32 @@ def laptops(request):
 
     params = {'allProducts': products}
     return render(request, "shop/laptops.html", params)
+
+
+def searchMatch(query, item):
+    if query in item.description.lower() or query in item.product_name.lower() or query in item.category.lower():
+        return True
+    else:
+        return False
+
+
+def search(request):
+    query = request.GET.get('search')
+    allProds = []
+    catprods = Product.objects.values('category', 'product_id')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        prodtemp = Product.objects.filter(category=cat)
+        prod = [item for item in prodtemp if searchMatch(query, item)]
+
+        n = len(prod)
+        if n % 4 == 0:
+            number_of_slides = n // 4
+        else:
+            number_of_slides = n // 4 + 1
+        if len(prod) != 0:
+            allProds.append([prod, range(1, number_of_slides), number_of_slides])
+    params = {'allProds': allProds, "msg": ""}
+    if len(allProds) == 0:
+        params = {'msg': f"No Results for {query} found"}
+    return render(request, 'shop/search.html', params)
