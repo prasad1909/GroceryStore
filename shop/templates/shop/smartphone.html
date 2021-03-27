@@ -117,6 +117,8 @@ if(localStorage.getItem('cart') != null)
 updatePopOver()
 cart = JSON.parse(localStorage.getItem('cart'));
 document.getElementById('cart').innerHTML = Object.keys(cart).length;
+}
+if(localStorage.getItem('smartphoneCart') != null ){
 smartphoneCart = JSON.parse(localStorage.getItem('smartphoneCart'));
 for(item in smartphoneCart)
 {
@@ -126,6 +128,8 @@ for(item in smartphoneCart)
          <span id="value${item}">${cart[item][0]}</span> <button class = "btn btn-primary plus" id = "plus${item}">+</button>`
 }
 }
+localStorage.setItem('cart', JSON.stringify(cart));
+localStorage.setItem('smartphoneCart', JSON.stringify(smartphoneCart));
 
 $('.divpr').on('click', 'button.cart', function(){
 var idstr = $(this).attr('id').toString()
@@ -214,6 +218,7 @@ function clearCart(){
     cart = {}
     smartphoneCart = {}
     updateCart(smartphoneCart)
+        $('#popcart').popover('hide');
 }
 </script>
 {% endblock %}

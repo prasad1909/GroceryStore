@@ -157,6 +157,7 @@ def searchMatch(query, item):
         return False
 
 
+@login_required(login_url='/login')
 def search(request):
     query = request.GET.get('search')
     allProds = []

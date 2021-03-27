@@ -1,4 +1,3 @@
-
 {% extends 'shop/basic.html' %}
 
 {% block css %}
@@ -50,7 +49,7 @@
     <!--Slideshow starts here -->
 
 {% for product, range, number_of_slides in allProducts %}
-    <h2 class="my-4">{{product.0.category}}</h2>
+    <h2 class="my-4">{{product.0.subcategory}}</h2>
     <div class="row">
 <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
     <ul class="carousel-indicators">
@@ -112,13 +111,14 @@ laptopCart = new Object();
 }
 if(localStorage.getItem('laptopCart') == null){
 laptopCart = new Object();
-localStorage.setItem('laptopCart', JSON.stringify(laptopCart));
 }
 if(localStorage.getItem('cart') != null)
 {
 updatePopOver()
 cart = JSON.parse(localStorage.getItem('cart'));
 document.getElementById('cart').innerHTML = Object.keys(cart).length;
+}
+if(localStorage.getItem('laptopCart') != null ){
 laptopCart = JSON.parse(localStorage.getItem('laptopCart'));
 for(item in laptopCart)
 {
@@ -128,6 +128,8 @@ for(item in laptopCart)
          <span id="value${item}">${cart[item][0]}</span> <button class = "btn btn-primary plus" id = "plus${item}">+</button>`
 }
 }
+localStorage.setItem('cart', JSON.stringify(cart));
+localStorage.setItem('laptopCart', JSON.stringify(laptopCart));
 
 $('.divpr').on('click', 'button.cart', function(){
 var idstr = $(this).attr('id').toString()
@@ -158,7 +160,6 @@ function updateCart(cart){
     for (let item in cart){
         total += cart[item][0]
          if(item in laptopCart){
-        console.log("from cart", item)
         document.getElementById(`div${item}`).innerHTML =
         `<button class = "btn btn-primary minus" id = "minus${item}">-</button>
          <span id="value${item}">${cart[item][0]}</span> <button class = "btn btn-primary plus" id = "plus${item}">+</button>`
@@ -217,12 +218,10 @@ function clearCart(){
     cart = {}
     laptopCart = {}
     updateCart(laptopCart)
+    $('#popcart').popover('hide');
 }
 </script>
 {% endblock %}
 
 
 
-
-</body>
-</html>

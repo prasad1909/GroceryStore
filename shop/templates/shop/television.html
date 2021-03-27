@@ -49,7 +49,7 @@
     <!--Slideshow starts here -->
 
 {% for product, range, number_of_slides in allProducts %}
-    <h2 class="my-4">{{product.0.category}}</h2>
+    <h2 class="my-4">{{product.0.subcategory}}</h2>
     <div class="row">
 <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
     <ul class="carousel-indicators">
@@ -105,21 +105,22 @@
 
 {% block js %}
 <script>
-if(localStorage.getItem('cart') == null && localStorage.getItem('televisionCart') == null){
+if(localStorage.getItem('cart') == null && localStorage.getItem('tvCart') == null){
 var cart = new Object();
-televisionCart = new Object();
+tvCart = new Object();
 }
-if(localStorage.getItem('televisionCart') == null){
-televisionCart = new Object();
-localStorage.setItem('televisionCart', JSON.stringify(televisionCart));
+if(localStorage.getItem('tvCart') == null){
+tvCart = new Object();
 }
 if(localStorage.getItem('cart') != null)
 {
 updatePopOver()
 cart = JSON.parse(localStorage.getItem('cart'));
 document.getElementById('cart').innerHTML = Object.keys(cart).length;
-televisionCart = JSON.parse(localStorage.getItem('televisionCart'));
-for(item in televisionCart)
+}
+if(localStorage.getItem('tvCart') != null ){
+tvCart = JSON.parse(localStorage.getItem('tvCart'));
+for(item in tvCart)
 {
         console.log("from cart", item)
         document.getElementById(`div${item}`).innerHTML =
@@ -127,6 +128,8 @@ for(item in televisionCart)
          <span id="value${item}">${cart[item][0]}</span> <button class = "btn btn-primary plus" id = "plus${item}">+</button>`
 }
 }
+localStorage.setItem('cart', JSON.stringify(cart));
+localStorage.setItem('tvCart', JSON.stringify(tvCart));
 
 $('.divpr').on('click', 'button.cart', function(){
 var idstr = $(this).attr('id').toString()
@@ -139,12 +142,12 @@ else {
     name = document.getElementById(`name${idstr}`).innerHTML
     price = document.getElementById(`price${idstr}`).innerHTML
     cart[idstr] = [qty, name, price]
-    televisionCart[idstr] = [qty, name, price]
-    console.log(televisionCart)
+    tvCart[idstr] = [qty, name, price]
+    console.log(tvCart)
     console.log(cart)
 }
 localStorage.setItem('cart', JSON.stringify(cart));
-localStorage.setItem('televisionCart', JSON.stringify(televisionCart));
+localStorage.setItem('tvCart', JSON.stringify(tvCart));
 document.getElementById('cart').innerHTML = Object.keys(cart).length;
 updateCart(cart)
 });
@@ -156,8 +159,7 @@ function updateCart(cart){
     let total = 0
     for (let item in cart){
         total += cart[item][0]
-         if(item in televisionCart){
-        console.log("from cart", item)
+         if(item in tvCart){
         document.getElementById(`div${item}`).innerHTML =
         `<button class = "btn btn-primary minus" id = "minus${item}">-</button>
          <span id="value${item}">${cart[item][0]}</span> <button class = "btn btn-primary plus" id = "plus${item}">+</button>`
@@ -208,14 +210,15 @@ function updatePopOver(){
 }
 
 function clearCart(){
-    televisionCart = JSON.parse(localStorage.getItem('televisionCart'))
-    for (let item in televisionCart){
+    tvCart = JSON.parse(localStorage.getItem('tvCart'))
+    for (let item in tvCart){
         document.getElementById(`div${item}`).innerHTML = `<button id="${item}" class="btn btn-primary cart">Add to Cart</button>`
 }
     localStorage.clear()
     cart = {}
-    televisionCart = {}
-    updateCart(televisionCart)
+    tvCart = {}
+    updateCart(tvCart)
+    $('#popcart').popover('hide');
 }
 </script>
 {% endblock %}
