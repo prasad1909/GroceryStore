@@ -85,12 +85,18 @@ def search(request):
 def smartphone(request):
     products = []
     product = Product.objects.filter(category='Smartphone')
-    n = len(product)
-    if n % 4 == 0:
-        number_of_slides = n // 4
-    else:
-        number_of_slides = n // 4 + 1
-    products.append([product, range(1, number_of_slides), number_of_slides])
+    subcategories = Product.objects.values('subcategory', 'product_id')
+    subcats = {item['subcategory'] for item in subcategories}
+    print(subcats)
+    for subcat in subcats:
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Smartphone')
+        n = len(prodtemp)
+        if n > 0:
+            if n % 4 == 0:
+                number_of_slides = n // 4
+            else:
+                number_of_slides = n // 4 + 1
+            products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
     params = {'allProducts': products}
 
@@ -144,7 +150,8 @@ def laptops(request):
 
 
 def searchMatch(query, item):
-    if query in item.description.lower() or query in item.product_name.lower() or query in item.category.lower():
+    query = query.lower()
+    if query in item.description.lower() or query in item.product_name.lower() or query in item.category.lower() or query in item.subcategory.lower():
         return True
     else:
         return False
