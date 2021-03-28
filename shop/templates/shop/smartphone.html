@@ -71,7 +71,7 @@
               <img src='/media/{{i.image}}' class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title" id="namepr{{i.product_id}}">{{i.product_name}}</h5>
-              <p class="card-text">{{i.description}}</p>
+              <p class="card-text">{{i.description|linebreaks}}</p>
                 <h6 >Price: ₹<span id="pricepr{{i.product_id}}">{{i.price}}</span></h6>
                 <span id="divpr{{i.product_id}}" class="divpr">
                 <button id="pr{{i.product_id}}" class="btn btn-primary cart">Add to Cart</button>
