@@ -84,7 +84,6 @@ def search(request):
 @login_required(login_url='/login')
 def smartphone(request):
     products = []
-    product = Product.objects.filter(category='Smartphone')
     subcategories = Product.objects.values('subcategory', 'product_id')
     subcats = {item['subcategory'] for item in subcategories}
     print(subcats)
@@ -106,13 +105,18 @@ def smartphone(request):
 @login_required(login_url='/login')
 def accessories(request):
     products = []
-    product = Product.objects.filter(category='Accessories')
-    n = len(product)
-    if n % 4 == 0:
-        number_of_slides = n // 4
-    else:
-        number_of_slides = n // 4 + 1
-    products.append([product, range(1, number_of_slides), number_of_slides])
+    subcategories = Product.objects.values('subcategory', 'product_id')
+    subcats = {item['subcategory'] for item in subcategories}
+    print(subcats)
+    for subcat in subcats:
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Accessories')
+        n = len(prodtemp)
+        if n > 0:
+            if n % 4 == 0:
+                number_of_slides = n // 4
+            else:
+                number_of_slides = n // 4 + 1
+            products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
     params = {'allProducts': products}
 
@@ -122,13 +126,18 @@ def accessories(request):
 @login_required(login_url='/login')
 def television(request):
     products = []
-    product = Product.objects.filter(category='Television')
-    n = len(product)
-    if n % 4 == 0:
-        number_of_slides = n // 4
-    else:
-        number_of_slides = n // 4 + 1
-    products.append([product, range(1, number_of_slides), number_of_slides])
+    subcategories = Product.objects.values('subcategory', 'product_id')
+    subcats = {item['subcategory'] for item in subcategories}
+    print(subcats)
+    for subcat in subcats:
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Television')
+        n = len(prodtemp)
+        if n > 0:
+            if n % 4 == 0:
+                number_of_slides = n // 4
+            else:
+                number_of_slides = n // 4 + 1
+            products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
     params = {'allProducts': products}
     return render(request, "shop/television.html", params)
@@ -137,13 +146,18 @@ def television(request):
 @login_required(login_url='/login')
 def laptops(request):
     products = []
-    product = Product.objects.filter(category='Laptop')
-    n = len(product)
-    if n % 4 == 0:
-        number_of_slides = n // 4
-    else:
-        number_of_slides = n // 4 + 1
-    products.append([product, range(1, number_of_slides), number_of_slides])
+    subcategories = Product.objects.values('subcategory', 'product_id')
+    subcats = {item['subcategory'] for item in subcategories}
+    print(subcats)
+    for subcat in subcats:
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Laptop')
+        n = len(prodtemp)
+        if n > 0:
+            if n % 4 == 0:
+                number_of_slides = n // 4
+            else:
+                number_of_slides = n // 4 + 1
+            products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
     params = {'allProducts': products}
     return render(request, "shop/laptops.html", params)
@@ -174,7 +188,7 @@ def search(request):
             number_of_slides = n // 4 + 1
         if len(prod) != 0:
             allProds.append([prod, range(1, number_of_slides), number_of_slides])
-    params = {'allProds': allProds, "msg": ""}
+    params = {'allProds': allProds, "msg": "", "query": query}
     if len(allProds) == 0:
         params = {'msg': f"No Results for {query} found"}
     return render(request, 'shop/search.html', params)

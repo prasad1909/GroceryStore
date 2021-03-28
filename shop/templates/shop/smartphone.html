@@ -4,14 +4,14 @@
 .col-md-3
           {
           display: inline-block;
-          margin-left: 14px;
+          margin-left: -4px;
           }
           .carousel-indicators .active {
           background-color: blue;
             }
           .col-md-3 img{
-              width: 95%;
-              max-height: 400px;;
+              width: 88%;
+              height: 280px;
           }
           body .carousel-indicator li{
           background-color: blue;
@@ -105,6 +105,7 @@
 
 {% block js %}
 <script>
+$('.carousel').carousel('pause');
 if(localStorage.getItem('cart') == null && localStorage.getItem('smartphoneCart') == null){
 var cart = new Object();
 smartphoneCart = new Object();

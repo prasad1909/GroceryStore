@@ -3,14 +3,14 @@
 .col-md-3
           {
           display: inline-block;
-          margin-left: 14px;
+          margin-left: -4px;
           }
           .carousel-indicators .active {
           background-color: blue;
             }
           .col-md-3 img{
-              width: 95%;
-              max-height: 400px;;
+              width: 88%;
+              height: 280px;;
           }
           body .carousel-indicator li{
           background-color: blue;
@@ -46,7 +46,7 @@
 <div class="container">
     <!--Slideshow starts here -->
     {% for product, range, nSlides in allProds %}
-    <h5 class="my-4" >{{product.0.category}}</h5>
+    <h5 class="my-4" >Showing Results for {{query}}</h5>
     <div class="row">
         <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
             <ul class="carousel-indicators">
