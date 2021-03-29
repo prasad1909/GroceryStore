@@ -26,7 +26,7 @@ left:-30px;
         <div class="col md-8">
             <h1>{{product.product_name}}</h1>
             <p><b>Price: ₹{{product.price}} </b></p>
-            <p> {{product.description}}</p>
+            <p> {{product.detailed_description|linebreaks}}</p>
         </div>
 
     </div>
