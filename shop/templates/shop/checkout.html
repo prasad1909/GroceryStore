@@ -1,5 +1,5 @@
 {% extends 'shop/basic.html' %}
-{% block title%} Checkout - My Home Shop{% endblock %}
+{% block title%} Checkout - Grocery Store{% endblock %}
 
 {% block css %}
 .move-left{
@@ -20,7 +20,7 @@
 
     </div>
     <div class="col my-4">
-        <h2>Step 1 - My Home Shop Checkout - Review Your Cart Items</h2>
+        <h2>Step 1 - Grocery Store Checkout - Review Your Cart Items</h2>
         <div>
             <ul class="list-group items" >
 
@@ -117,7 +117,7 @@ $('.items').append(`<li class="list-group-item d-flex justify-content-between al
         $('.items').append(listr)
         }
         $('.totalAmt').append(`<ol class="breadcrumb mt-3">
-    <li class="breadcrumb-item active" aria-current="page">Your Cart Total Is <b>₹<span id="totalPrice"></span></b>. Enter your details below & place your order. Thanks for using My Home Shop!</li>
+    <li class="breadcrumb-item active" aria-current="page">Your Cart Total Is <b>₹<span id="totalPrice"></span></b>. Enter your details below & place your order. Thanks for using Grocery Store!</li>
   </ol>`)
 document.getElementById('totalPrice').innerHTML = totalprice
 }

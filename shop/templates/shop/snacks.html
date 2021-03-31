@@ -109,12 +109,12 @@
 {% block js %}
 <script>
 $('.carousel').carousel('pause');
-if(localStorage.getItem('cart') == null && localStorage.getItem('laptopCart') == null){
+if(localStorage.getItem('cart') == null && localStorage.getItem('snacksCart') == null){
 var cart = new Object();
-laptopCart = new Object();
+snacksCart = new Object();
 }
-if(localStorage.getItem('laptopCart') == null){
-laptopCart = new Object();
+if(localStorage.getItem('snacksCart') == null){
+snacksCart = new Object();
 }
 if(localStorage.getItem('cart') != null)
 {
@@ -122,9 +122,9 @@ updatePopOver()
 cart = JSON.parse(localStorage.getItem('cart'));
 document.getElementById('cart').innerHTML = Object.keys(cart).length;
 }
-if(localStorage.getItem('laptopCart') != null ){
-laptopCart = JSON.parse(localStorage.getItem('laptopCart'));
-for(item in laptopCart)
+if(localStorage.getItem('snacksCart') != null ){
+snacksCart = JSON.parse(localStorage.getItem('snacksCart'));
+for(item in snacksCart)
 {
         console.log("from cart", item)
         document.getElementById(`div${item}`).innerHTML =
@@ -133,7 +133,7 @@ for(item in laptopCart)
 }
 }
 localStorage.setItem('cart', JSON.stringify(cart));
-localStorage.setItem('laptopCart', JSON.stringify(laptopCart));
+localStorage.setItem('snacksCart', JSON.stringify(snacksCart));
 
 $('.divpr').on('click', 'button.cart', function(){
 var idstr = $(this).attr('id').toString()
@@ -146,12 +146,12 @@ else {
     name = document.getElementById(`name${idstr}`).innerHTML
     price = document.getElementById(`price${idstr}`).innerHTML
     cart[idstr] = [qty, name, price]
-    laptopCart[idstr] = [qty, name, price]
-    console.log(laptopCart)
+    snacksCart[idstr] = [qty, name, price]
+    console.log(snacksCart)
     console.log(cart)
 }
 localStorage.setItem('cart', JSON.stringify(cart));
-localStorage.setItem('laptopCart', JSON.stringify(laptopCart));
+localStorage.setItem('snacksCart', JSON.stringify(snacksCart));
 document.getElementById('cart').innerHTML = Object.keys(cart).length;
 updateCart(cart)
 });
@@ -163,7 +163,7 @@ function updateCart(cart){
     let total = 0
     for (let item in cart){
         total += cart[item][0]
-         if(item in laptopCart){
+         if(item in snacksCart){
         document.getElementById(`div${item}`).innerHTML =
         `<button class = "btn btn-primary minus" id = "minus${item}">-</button>
          <span id="value${item}">${cart[item][0]}</span> <button class = "btn btn-primary plus" id = "plus${item}">+</button>`
@@ -214,14 +214,14 @@ function updatePopOver(){
 }
 
 function clearCart(){
-    laptopCart = JSON.parse(localStorage.getItem('laptopCart'))
-    for (let item in laptopCart){
+    snacksCart = JSON.parse(localStorage.getItem('snacksCart'))
+    for (let item in snacksCart){
         document.getElementById(`div${item}`).innerHTML = `<button id="${item}" class="btn btn-primary cart">Add to Cart</button>`
 }
     localStorage.clear()
     cart = {}
-    laptopCart = {}
-    updateCart(laptopCart)
+    snacksCart = {}
+    updateCart(snacksCart)
         $('#popcart').popover('hide');
 }
 </script>

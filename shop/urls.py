@@ -10,8 +10,8 @@ urlpatterns = [
     path('checkOut/', views.checkOut, name="checkout"),
     path('search/', views.search, name="search"),
     path('fruits/', views.fruits, name="fruits"),
-    path('accessories/', views.accessories, name="accessories"),
-    path('television/', views.television, name="television"),
+    path('staples/', views.staples, name="staples"),
+    path('drinks/', views.drinks, name="drinks"),
     path('snacks/', views.snacks, name="snacks"),
     path('search/', views.search, name="search")
 ]

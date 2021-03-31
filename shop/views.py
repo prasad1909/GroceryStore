@@ -88,7 +88,7 @@ def fruits(request):
     subcats = {item['subcategory'] for item in subcategories}
     print(subcats)
     for subcat in subcats:
-        prodtemp = Product.objects.filter(subcategory=subcat, category='Fruits And Vegetables')
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Fruits & Vegetables')
         n = len(prodtemp)
         if n > 0:
             if n % 4 == 0:
@@ -103,13 +103,13 @@ def fruits(request):
 
 
 @login_required(login_url='/login')
-def accessories(request):
+def staples(request):
     products = []
     subcategories = Product.objects.values('subcategory', 'product_id')
     subcats = {item['subcategory'] for item in subcategories}
     print(subcats)
     for subcat in subcats:
-        prodtemp = Product.objects.filter(subcategory=subcat, category='Accessories')
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Daily Staples')
         n = len(prodtemp)
         if n > 0:
             if n % 4 == 0:
@@ -120,17 +120,17 @@ def accessories(request):
 
     params = {'allProducts': products}
 
-    return render(request, "shop/accessories.html", params)
+    return render(request, "shop/staples.html", params)
 
 
 @login_required(login_url='/login')
-def television(request):
+def drinks(request):
     products = []
     subcategories = Product.objects.values('subcategory', 'product_id')
     subcats = {item['subcategory'] for item in subcategories}
     print(subcats)
     for subcat in subcats:
-        prodtemp = Product.objects.filter(subcategory=subcat, category='Television')
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Drinks & Beverages')
         n = len(prodtemp)
         if n > 0:
             if n % 4 == 0:
@@ -140,7 +140,7 @@ def television(request):
             products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
     params = {'allProducts': products}
-    return render(request, "shop/television.html", params)
+    return render(request, "shop/drinks.html", params)
 
 
 @login_required(login_url='/login')
@@ -150,7 +150,7 @@ def snacks(request):
     subcats = {item['subcategory'] for item in subcategories}
     print(subcats)
     for subcat in subcats:
-        prodtemp = Product.objects.filter(subcategory=subcat, category='Snacks And Munchies')
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Snacks & Munchies')
         n = len(prodtemp)
         if n > 0:
             if n % 4 == 0:
