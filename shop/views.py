@@ -82,13 +82,13 @@ def search(request):
 
 
 @login_required(login_url='/login')
-def smartphone(request):
+def fruits(request):
     products = []
     subcategories = Product.objects.values('subcategory', 'product_id')
     subcats = {item['subcategory'] for item in subcategories}
     print(subcats)
     for subcat in subcats:
-        prodtemp = Product.objects.filter(subcategory=subcat, category='Smartphone')
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Fruits And Vegetables')
         n = len(prodtemp)
         if n > 0:
             if n % 4 == 0:
@@ -99,7 +99,7 @@ def smartphone(request):
 
     params = {'allProducts': products}
 
-    return render(request, "shop/smartphone.html", params)
+    return render(request, "shop/fruits.html", params)
 
 
 @login_required(login_url='/login')
@@ -144,13 +144,13 @@ def television(request):
 
 
 @login_required(login_url='/login')
-def laptops(request):
+def snacks(request):
     products = []
     subcategories = Product.objects.values('subcategory', 'product_id')
     subcats = {item['subcategory'] for item in subcategories}
     print(subcats)
     for subcat in subcats:
-        prodtemp = Product.objects.filter(subcategory=subcat, category='Laptop')
+        prodtemp = Product.objects.filter(subcategory=subcat, category='Snacks And Munchies')
         n = len(prodtemp)
         if n > 0:
             if n % 4 == 0:
@@ -160,7 +160,7 @@ def laptops(request):
             products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
     params = {'allProducts': products}
-    return render(request, "shop/laptops.html", params)
+    return render(request, "shop/snacks.html", params)
 
 
 def searchMatch(query, item):

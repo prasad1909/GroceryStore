@@ -6,7 +6,6 @@ class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
     product_name = models.CharField(max_length=50)
     description = models.CharField(max_length=80, default="")
-    detailed_description = models.TextField(max_length=2000, default="")
     category = models.CharField(max_length=50, default="")
     subcategory = models.CharField(max_length=50, default="")
     price = models.IntegerField(default=0)

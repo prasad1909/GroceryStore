@@ -8,10 +8,10 @@ urlpatterns = [
     path('tracker/', views.tracker, name="tracker"),
     path('products/<int:myid>', views.productView, name="productView"),
     path('checkOut/', views.checkOut, name="checkout"),
-    path('search/',views.search, name="search"),
-    path('smartphone/', views.smartphone, name="smartphone"),
+    path('search/', views.search, name="search"),
+    path('fruits/', views.fruits, name="fruits"),
     path('accessories/', views.accessories, name="accessories"),
     path('television/', views.television, name="television"),
-    path('laptops/', views.laptops, name="laptops"),
+    path('snacks/', views.snacks, name="snacks"),
     path('search/', views.search, name="search")
 ]
