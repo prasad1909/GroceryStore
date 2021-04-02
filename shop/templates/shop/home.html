@@ -96,7 +96,7 @@ if(localStorage.getItem('cart') != undefined){
     total = 0
     for (var item in popCart){
         popStr = popStr + "<b>" + i + "</b>. ";
-        popStr = popStr + popCart[item][1] + "... Qty: " + popCart[item][0] + '<br>';
+        popStr = popStr + popCart[item][1].slice(0,20) + "... Qty: " + popCart[item][0] + '<br>';
         total += popCart[item][0]
         i = i+1;
     }

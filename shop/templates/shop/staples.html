@@ -204,7 +204,7 @@ function updatePopOver(){
 
     for (var item in popCart){
         popStr = popStr + "<b>" + i + "</b>. ";
-        popStr = popStr + popCart[item][1] + "... Qty: " + popCart[item][0] + '<br>';
+        popStr = popStr + popCart[item][1].slice(0,20) + "... Qty: " + popCart[item][0] + '<br>';
         i = i+1;
     }
     popStr = popStr + `</div> <a href='/shop/checkOut'><button class='btn btn-danger' id='checkout'>Check Out</button></a>
