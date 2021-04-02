@@ -21,6 +21,17 @@ right: 276px;
 .card-img-top{
 height: 250px;
 }
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+    background-color: rgba(0,0,0,0);
+}
 
 {% endblock %}
 
@@ -28,41 +39,45 @@ height: 250px;
 {% load static %}
 <div class="row my-5 d-flex justify-content-center align-items-center">
       <div class="col-sm-6">
-<a href="/shop/fruits"><div class="card" style="width: 25rem; margin-left: 250px">
+<div class="card" style="width: 25rem; margin-left: 250px">
   <img src="{%static 'shop/fruits.jpg'%}" class="card-img-top" alt="...">
   <div class="card-body">
     <h1 class="card-title" style="text-align: center;">Fruits & Vegetables</h1>
+      <a href="/shop/fruits" class="stretched-link"> </a>
   </div>
 </div>
-   </a> </div>
+    </div>
    <div class="col-sm-6 move-left">
-<a href="/shop/snacks"> <div class="card" style="width: 25rem; margin-left: 250px">
+ <div class="card" style="width: 25rem; margin-left: 250px">
   <img src="{%static 'shop/snacks.jpg'%}" class="card-img-top" alt="...">
   <div class="card-body">
     <h1 class="card-title" style="text-align: center;">Snacks & Munchies</h1>
+      <a href="/shop/snacks" class="stretched-link"></a>
   </div>
 </div>
-    </a></div>
+    </div>
 
 </div>
 
 <div class="row my-5 d-flex justify-content-center align-items-center">
       <div class="col-sm-6">
-<a href="/shop/drinks"><div class="card" style="width: 25rem; margin-left: 250px">
+<div class="card" style="width: 25rem; margin-left: 250px">
   <img src="{%static 'shop/drinks.jpg'%}" class="card-img-top" alt="...">
   <div class="card-body">
     <h1 class="card-title" style="text-align: center;">Drinks & Beverages</h1>
+      <a href="/shop/drinks" class="stretched-link"></a>
   </div>
 </div>
-   </a> </div>
+    </div>
    <div class="col-sm-6 move-left">
-<a href="/shop/staples"> <div class="card" style="width: 25rem; margin-left: 250px">
+<div class="card" style="width: 25rem; margin-left: 250px">
   <img src="{%static 'shop/staples.jpg'%}" class="card-img-top" alt="...">
   <div class="card-body">
     <h1 class="card-title" style="text-align: center;">Daily Staples</h1>
+      <a href="/shop/staples" class="stretched-link"></a>
   </div>
 </div>
-    </a></div>
+   </div>
 
 </div>
 {% endblock %}
