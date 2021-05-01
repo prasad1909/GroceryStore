@@ -100,9 +100,9 @@ def fruits(request):
                 number_of_slides = n // 4 + 1
             products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
-    params = {'allProducts': products}
+    params = {'allProducts': products, 'category': 'fruits'}
 
-    return render(request, "shop/fruits.html", params)
+    return render(request, "shop/products.html", params)
 
 
 @login_required(login_url='/login')
@@ -121,9 +121,9 @@ def staples(request):
                 number_of_slides = n // 4 + 1
             products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
-    params = {'allProducts': products}
+    params = {'allProducts': products, 'category': 'staples'}
 
-    return render(request, "shop/staples.html", params)
+    return render(request, "shop/products.html", params)
 
 
 @login_required(login_url='/login')
@@ -142,8 +142,8 @@ def drinks(request):
                 number_of_slides = n // 4 + 1
             products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
-    params = {'allProducts': products}
-    return render(request, "shop/drinks.html", params)
+    params = {'allProducts': products, 'category': 'drinks'}
+    return render(request, "shop/products.html", params)
 
 
 @login_required(login_url='/login')
@@ -162,13 +162,13 @@ def snacks(request):
                 number_of_slides = n // 4 + 1
             products.append([prodtemp, range(1, number_of_slides), number_of_slides])
 
-    params = {'allProducts': products}
-    return render(request, "shop/snacks.html", params)
+    params = {'allProducts': products, 'category': 'snacks'}
+    return render(request, "shop/products.html", params)
 
 
 def searchMatch(query, item):
     query = query.lower()
-    if query in item.description.lower() or query in item.product_name.lower() or query in item.category.lower() or query in item.subcategory.lower():
+    if query in item.description.lower() or query in item.product_name.lower() or query in item.subcategory.lower():
         return True
     else:
         return False
@@ -195,3 +195,91 @@ def search(request):
     if len(allProds) == 0:
         params = {'msg': f"No Results for {query} found"}
     return render(request, 'shop/search.html', params)
+
+
+@login_required(login_url='/login')
+def bestsellers(request):
+    products = []
+    categories = Product.objects.values('category', 'product_id')
+    #cats = {item['category'] for item in categories}
+    #p_ids = {item['product_id'] for item in categories}
+    #print(f"from bestsellers {cats}")
+    #print(f"from bestsellers {p_ids}")
+    #for cat in cats:
+        #prodtemp = Product.objects.filter(category=cat)
+        #n = len(prodtemp)
+        #print(f"{n} in {cat}")
+        #if n > 0:
+            #if n % 4 == 0:
+                #number_of_slides = n // 4
+            #else:
+                #number_of_slides = n // 4 + 1
+            #products.append([prodtemp, range(1, number_of_slides), number_of_slides])int
+    orders = Order.objects.values('items')
+    #print(orders)
+    for item in categories:
+        if item['category']=='Fruits & Vegetables':
+            print(f"Fruits: {item['product_id']}")
+        if item['category']=='Snacks & Munchies':
+            print(f"Snacks: {item['product_id']}")
+        if item['category']=='Drinks & Beverages':
+            print(f"Drinks: {item['product_id']}")
+        if item['category']=='Daily Staples':
+            print(f"Staples: {item['product_id']}")
+    p_list = []
+    for i in range(1,70):
+        count = 0
+        for order in orders:
+            order = json.loads(str(order['items']))
+            for item in order:
+                if item == f'pr{i}':
+                    count += order[item][0]
+        p_list.append([i, count])
+    print(p_list)
+    f_id = [1, 2]
+    s_id = [3]
+    st_id = [4]
+    d_id = []
+    for j in range(5,27):
+        f_id.append(j)
+    for j in range(27, 51):
+        s_id.append(j)
+    for j in range(62,70):
+        st_id.append(j)
+    for j in range(51,62):
+        d_id.append(j)
+    fruit = []
+    drink = []
+    staple = []
+    snack = []
+    for p in p_list:
+        if p[0] in f_id:
+            fruit.append([p[1],p[0]])
+        elif p[0] in s_id:
+            snack.append([p[1],p[0]])
+        elif p[0] in st_id:
+            staple.append([p[1],p[0]])
+        elif p[0] in d_id:
+            drink.append([p[1],p[0]])
+    fruit = sorted(fruit)
+    fruit = fruit[len(fruit)-4:]
+    snack = sorted(snack)
+    snack = snack[len(snack)-4:]
+    staple = sorted(staple)
+    staple = staple[len(staple)-4:]
+    drink = sorted(drink)
+    drink = drink[len(drink)-4:]
+    
+    products = []
+    prodtemp = Product.objects.filter(product_id=fruit[0][1])|Product.objects.filter(product_id=fruit[1][1])|Product.objects.filter(product_id=fruit[2][1])|Product.objects.filter(product_id=fruit[3][1])
+    products.append([prodtemp, range(1,1) ,1])
+    prodtemp = Product.objects.filter(product_id=snack[0][1])|Product.objects.filter(product_id=snack[1][1])|Product.objects.filter(product_id=snack[2][1])|Product.objects.filter(product_id=snack[3][1])
+    products.append([prodtemp, range(1,1) ,1])
+    prodtemp = Product.objects.filter(product_id=drink[0][1])|Product.objects.filter(product_id=drink[1][1])|Product.objects.filter(product_id=drink[2][1])|Product.objects.filter(product_id=drink[3][1])
+    products.append([prodtemp, range(1,1) ,1])
+    prodtemp = Product.objects.filter(product_id=staple[0][1])|Product.objects.filter(product_id=staple[1][1])|Product.objects.filter(product_id=staple[2][1])|Product.objects.filter(product_id=staple[3][1])
+    products.append([prodtemp, range(1,1) ,1])
+    print(products)
+
+    params = {'allProducts': products}
+    return render(request, "shop/bestsellers.html", params)

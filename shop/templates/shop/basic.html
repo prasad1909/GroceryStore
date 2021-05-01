@@ -16,6 +16,13 @@
     margin-right: 20px;
   }
 
+  .custom-select{
+    background-color: #343a40;
+    color: #fff;
+    border: none;
+    outline: none;
+  }
+
           {% block css %} {% endblock %}
   </style>
   </head>
@@ -42,7 +49,16 @@
       <li class="nav-item active">
         <a class="nav-link" href="/shop/tracker">Tracker <span class="sr-only">(current)</span></a>
       </li>
-
+      <li class="nav-item active">
+      <select class="custom-select" onchange="location = this.value;">
+        <option selected value="http://127.0.0.1:8000/shop/">Categories</option>
+        <option value="http://127.0.0.1:8000/shop/bestsellers">Best Sellers</option>
+        <option value="http://127.0.0.1:8000/shop/fruits">Fruits & Vegetables</option>
+        <option value="http://127.0.0.1:8000/shop/snacks">Snacks & Munchies</option>
+        <option value="http://127.0.0.1:8000/shop/drinks">Drinks & Beverages</option>
+        <option value="http://127.0.0.1:8000/shop/staples">Daily Staples</option>
+      </select>
+      </li>
 
 
     </ul>
